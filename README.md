@@ -65,12 +65,6 @@ enrichment (Fig. 3h, 5h) were done outside R and are not part of this repository
 | 6f | Jaccard index per CVD category | `Fig6_2_CVD_TCR_panels.R` (section 4) | `jaccard_matrix_full.csv` | Prism |
 | 6g | Frequency-weighted CDR3b overlap | `Fig6_2_CVD_TCR_panels.R` (section 4D) | `per_patient_freq_weighted_overlap.csv` | Prism |
 
-## Sample identifiers
-
-Patients are numbered P1-P16 in this repository (P1-P8 rupture, P9-P16 erosion). Sample names in the
-metadata of the objects and the names of the per-patient contig files (`P<n>_contigs.csv`) have to follow
-this numbering.
-
 ## External inputs
 
 - `data/ObjFull.rds`: demultiplexed, QC-filtered CITE-seq object (Cell Ranger, hashtag demultiplexing, QC and
@@ -83,21 +77,10 @@ this numbering.
 
 ## Software
 
-R 4.x with Seurat 5, scRepertoire 2.0.7, Libra (`neurorestore/Libra` from GitHub, not the CRAN package of
-the same name), GeneNMF, UCell, MAST, edgeR; Python with pySCENIC and hucira.
+R 4.x with Seurat 5, scRepertoire 2.0.7, Libra (`neurorestore/Libra` from GitHub), GeneNMF, UCell, MAST, edgeR; Python with pySCENIC and hucira.
 
 Notes for rerunning with current package versions:
 - `Fig3g_pseudobulk_DE.R`: current Libra versions expect Seurat v5 assays (see the commented conversion
   line in the script) and report `avg_logFC` with the opposite sign; statistics are otherwise the same.
 - Fig. 6d: `clonalDiversity()` returns a different table in scRepertoire versions later than 2.0.7.
 - GeneNMF (Fig. 3b-c) is not seeded.
-
-## Rerun check
-
-```bash
-bash rerun/run_rerun.sh            # edit SRC and RERUN at the top of the script, or pass them as variables
-RERUN_DRY=1 bash rerun/run_rerun.sh
-```
-
-Copies the inputs into a separate folder, runs the panel-generating sections of the scripts there
-(starting from the stored objects) and compares regenerated tables and panels with the originals.
